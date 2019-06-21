@@ -1,6 +1,6 @@
 {
   "name": "micro-jwt-authz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validate a JWTs scope to authorize access to an endpoint",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aulos/micro-jwt-auth.git"
+    "url": "git+https://github.com/Aulos/micro-jwt-authz.git"
   },
   "keywords": [
     "micro",
@@ -17,7 +17,7 @@
   ],
   "author": "Damian Schenkelman, Pawel Zubrycki",
   "license": "MIT",
-  "homepage": "https://github.com/Aulos/micro-jwt-auth#readme",
+  "homepage": "https://github.com/Aulos/micro-jwt-authz#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "husky": "^1.1.2",
