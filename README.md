@@ -1,37 +1,39 @@
-# express-jwt-authz ![](https://travis-ci.org/auth0/express-jwt-authz.svg?branch=master)
+# micro-jwt-authz
 
 Validate a JWTs `scope` to authorize access to an endpoint.
 
 ## Install
 
-    $ npm install express-jwt-authz
-
-> `express@^4.0.0` is a peer dependency. Make sure it is installed in your project.
+    $ npm install micro-jwt-authz
 
 ## Usage
 
-Use together with [express-jwt](https://github.com/auth0/express-jwt) to both validate a JWT and make sure it has the correct permissions to call an endpoint.
+Use together with [micro-jwt-auth](https://github.com/kandros/micro-jwt-auth) to both validate a JWT and make sure it has the correct permissions to call an endpoint.
 
 ```javascript
-var jwt = require('express-jwt');
-var jwtAuthz = require('express-jwt-authz');
+const jwtAuth = require('micro-jwt-auth');
+const jwtAuthz = require('micro-jwt-authz');
 
-var options = {};
-app.get('/users',
-  jwt({ secret: 'shared_secret' }),
-  jwtAuthz([ 'read:users' ], options),
-  function(req, res) { ... });
+const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
+
+const options = {};
+module.exports = compose(
+  jwtAuth('shared_secret'),
+  jwtAuthz([ 'read:users' ], option),
+  function(req, res) { ... }
+);
 ```
 
 If multiple scopes are provided, the user must have _any_ the required scopes.
 
 ```javascript
-app.post('/users',
-  jwt({ secret: 'shared_secret' }),
+const handler = compose(
+  jwtAuth('shared_secret'),
   jwtAuthz([ 'read:users', 'write:users' ], {}),
-  function(req, res) { ... });
+  function(req, res) { ... }
+);
 
-// This user will be denied access
+// This user will have access
 var authorizedUser = {
   scope: 'read:users'
 };
@@ -40,10 +42,11 @@ var authorizedUser = {
 To check that the user has _all_ the scopes provided, use the `checkAllScopes: true` option:
 
 ```javascript
-app.post('/users',
-  jwt({ secret: 'shared_secret' }),
+const handler = compose(
+  jwtAuth('shared_secret'),
   jwtAuthz([ 'read:users', 'write:users' ], { checkAllScopes: true }),
-  function(req, res) { ... });
+  function(req, res) { ... }
+);
 
 // This user will have access
 var authorizedUser = {
@@ -78,7 +81,7 @@ If you have found a bug or if you have a feature request, please report them at 
 
 ## Author
 
-[Auth0](https://auth0.com)
+[Auth0](https://auth0.com), [Aulos](https://github.com/Aulos)
 
 ## License
 
