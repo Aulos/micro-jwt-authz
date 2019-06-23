@@ -71,7 +71,6 @@ The JWT must have a `scope` claim and it must either be a string of space-separa
 
 ## Options
 
-- `failWithError`: When set to `true`, will forward errors to `next` instead of ending the response directly. Defaults to `false`.
 - `checkAllScopes`: When set to `true`, all the expected scopes will be checked against the user's scopes. Defaults to `false`.
 - `customScopeKey`: The property name to check for the scope. By default, permissions are checked against `user.scope`, but you can change it to be `user.myCustomScopeKey` with this option. Defaults to `scope`.
 - `customJwtKey`: The request's property name to check for verified JWT token. Defaults to `jwt`.
